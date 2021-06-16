@@ -13,7 +13,7 @@ const options = {
 };
 const connectWithRetry = () => {
     console.log('MongoDB connection with retry')
-    mongoose.connect("mongodb://koba:qmsAh-6DV.KQ8zc@cluster0.m8ffs.mongodb.net/kobacode?retryWrites=true&w=majority", options).then(()=>{
+    mongoose.connect("mongodb+srv://koba:%40Senha%3F@cluster-0.m8ffs.mongodb.net/application", options).then(()=>{
         console.log('MongoDB is connected')
     }).catch(err=>{
         console.log('MongoDB connection unsuccessful, retry after 5 seconds. ', ++count);
