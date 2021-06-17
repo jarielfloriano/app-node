@@ -1,34 +1,40 @@
 const mongoose = require('../../common/services/mongoose.service').mongoose;
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
-    permissionLevel: Number
+const citySchema = new Schema({
+    name: String,
+    uf: String
 });
 
-userSchema.virtual('id').get(function () {
+citySchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
-userSchema.set('toJSON', {
+citySchema.set('toJSON', {
     virtuals: true
 });
 
-userSchema.findById = function (cb) {
-    return this.model('Users').find({id: this.id}, cb);
+citySchema.findById = function (cb) {
+    return this.model('Citys').find({id: this.id}, cb);
 };
 
-const User = mongoose.model('Users', userSchema);
+const City = mongoose.model('Citys', citySchema);
 
-exports.findByEmail = (email) => {
-    return User.find({email: email});
+exports.findByName = (name) => {
+    return City.find({name: name});
 };
+
+exports.findByUF = (uf) => {
+    return City.find({uf: uf});
+};
+
+exports.exists = (name, uf) => {
+    return City.find({name: name, uf: uf});
+};
+
 exports.findById = (id) => {
-    return User.findById(id)
+    return City.findById(id)
         .then((result) => {
             result = result.toJSON();
             delete result._id;
@@ -37,35 +43,35 @@ exports.findById = (id) => {
         });
 };
 
-exports.createUser = (userData) => {
-    const user = new User(userData);
-    return user.save();
+exports.createCity = (cityData) => {
+    const city = new City(cityData);
+    return city.save();
 };
 
 exports.list = (perPage, page) => {
     return new Promise((resolve, reject) => {
-        User.find()
+        City.find()
             .limit(perPage)
             .skip(perPage * page)
-            .exec(function (err, users) {
+            .exec(function (err, citys) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(users);
+                    resolve(citys);
                 }
             })
     });
 };
 
-exports.patchUser = (id, userData) => {
-    return User.findOneAndUpdate({
+exports.patchCity = (id, cityData) => {
+    return City.findOneAndUpdate({
         _id: id
-    }, userData);
+    }, cityData);
 };
 
-exports.removeById = (userId) => {
+exports.removeById = (cityId) => {
     return new Promise((resolve, reject) => {
-        User.deleteMany({_id: userId}, (err) => {
+        City.deleteMany({_id: cityId}, (err) => {
             if (err) {
                 reject(err);
             } else {
