@@ -2,16 +2,18 @@
 
 This is REST API with NodeJS
 
-## Before using
-
-- Please make sure that you have:
+## Requisitos
  - Node.js installed (https://nodejs.org/)
- - MongoDB installed and running locally (https://www.mongodb.com/)
-   - Using Windows, just open the terminal at where you installed mongo and run `mongod.exe`
- - Run `npm install` or `yarn` in your root project folder
+ - MongoDB (https://www.mongodb.com/)
+ - Insomnia (https://insomnia.rest)
+ - insomnia-plugin-default-headers (https://insomnia.rest/plugins/insomnia-plugin-default-headers)
 
-## Usage
+## Instalação
+ - `npm install`
 
-To run the project, please use a command line the following:
+## Usando
+É interessante utilizar o plugin de headers padrão do insomnia para passar o token para todos os requests.
+Veja como fazer isso em: https://github.com/kong/insomnia/tree/master/plugins/insomnia-plugin-default-headers
+
+Para executar o projeto, utilize o comando:
  - `npm start`
-    - It will run the server at port 3600
