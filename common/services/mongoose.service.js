@@ -9,14 +9,14 @@ const options = {
     // all other approaches are now deprecated by MongoDB:
     useNewUrlParser: true,
     useUnifiedTopology: true
-    
+
 };
 const connectWithRetry = () => {
-    console.log('MongoDB connection with retry')
+    console.log('Iniciando conexão com o MongoDB ...')
     mongoose.connect("mongodb+srv://koba:%40Senha%3F@cluster-0.m8ffs.mongodb.net/application", options).then(()=>{
-        console.log('MongoDB is connected')
+        console.log('MongoDB está conectado :)')
     }).catch(err=>{
-        console.log('MongoDB connection unsuccessful, retry after 5 seconds. ', ++count);
+        console.log('MongoDB não foi conectado, nova tentativa em 5 segundosgit . ', ++count);
         setTimeout(connectWithRetry, 5000)
     })
 };
