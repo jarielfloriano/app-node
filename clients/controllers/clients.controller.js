@@ -36,13 +36,6 @@ exports.getByName = (req, res) => {
         });
 };
 
-exports.getByUF = (req, res) => {
-    ClientModel.findByUF(req.params.uf)
-        .then((result) => {
-            res.status(200).send(result);
-        });
-};
-
 exports.patchById = (req, res) => {
     ClientModel.patchClient(req.params.clientId, req.body)
         .then((result) => {
@@ -51,7 +44,7 @@ exports.patchById = (req, res) => {
 
 };
 
-exports.removeById = (req, res) => {
+exports.removeById = async (req, res) => {
     ClientModel.removeById(req.params.clientId)
         .then((result)=>{
             res.status(204).send({});

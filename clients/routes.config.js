@@ -1,20 +1,28 @@
-const CitysController = require('./controllers/citys.controller');
+const ClientsController = require('./controllers/clients.controller');
 const ValidationMiddleware = require('../common/middlewares/auth.validation.middleware');
 
 exports.routesConfig = function (app) {
-    app.post('/citys', [
-        CitysController.insert
+    app.post('/clients', [
+        ClientsController.insert
     ]);
-    app.get('/citys', [
+    app.get('/clients', [
         ValidationMiddleware.validJWTNeeded,
-        CitysController.list
+        ClientsController.list
     ]);
-    app.get('/citys/uf/:uf', [
+    app.get('/clients/:clientId', [
         ValidationMiddleware.validJWTNeeded,
-        CitysController.getByUF
+        ClientsController.getById
     ]);
-    app.get('/citys/name/:name', [
+    app.patch('/clients/:clientId', [
         ValidationMiddleware.validJWTNeeded,
-        CitysController.getByName
+        ClientsController.patchById
+    ]);
+    app.delete('/clients/:clientId', [
+        ValidationMiddleware.validJWTNeeded,
+        ClientsController.removeById
+    ]);
+    app.get('/clients/name/:name', [
+        ValidationMiddleware.validJWTNeeded,
+        ClientsController.getByName
     ]);
 };
