@@ -2,6 +2,12 @@ const mongoose = require('../../common/services/mongoose.service').mongoose;
 const Schema = mongoose.Schema;
 
 const citySchema = new Schema({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+        required: true,
+        auto: true,
+    },
     name: String,
     uf: String
 });
